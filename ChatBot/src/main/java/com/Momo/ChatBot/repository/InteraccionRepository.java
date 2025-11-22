@@ -1,9 +1,9 @@
 package com.Momo.ChatBot.repository;
 
-import com.Momo.ChatBot.model.Interacciones;
+import com.Momo.ChatBot.model.Interaccion;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface InteraccionesRepository extends ReactiveCrudRepository<Interacciones, Long>{
+public interface InteraccionRepository extends ReactiveCrudRepository<Interaccion, Long>{
 }

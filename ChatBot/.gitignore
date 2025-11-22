@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Archivos específicos de entornos de desarrollo
+.idea/             # Ignorar la carpeta de configuración de IntelliJ
+*.iml              # Ignorar archivos de módulo de IntelliJ
+
+# Directorios generados por Maven y Java
+/target/           # Ignorar la carpeta de compilación de Maven
+*.class
+
+# Archivos de registro y caché
+*.log
+/bin/

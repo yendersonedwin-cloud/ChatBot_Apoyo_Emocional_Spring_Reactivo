@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Table("interacciones")
 @Data
 @AllArgsConstructor
-public class Interacciones {
+public class Interaccion {
 
         @Id
         private Long id;
@@ -17,9 +17,9 @@ public class Interacciones {
         private String emocionDetectada;
 
         // Constructor vacío (necesario) y constructor con parámetros para guardar
-        public Interacciones() {}
+        public Interaccion() {}
 
-        public Interacciones(String mensajeUsuario, String respuestaChatbot, String emocionDetectada) {
+        public Interaccion(String mensajeUsuario, String respuestaChatbot, String emocionDetectada) {
             this.mensajeUsuario = mensajeUsuario;
             this.respuestaChatbot = respuestaChatbot;
             this.emocionDetectada = emocionDetectada;
