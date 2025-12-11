@@ -10,15 +10,12 @@ import org.springframework.security.crypto.password.PasswordEncoder; // <--- Nue
 @SpringBootApplication(exclude = {org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration.class, org.springframework.boot.autoconfigure.security.reactive.ReactiveUserDetailsServiceAutoConfiguration.class})
 public class ChatBotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ChatBotApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ChatBotApplication.class, args);
+    }
 
-	/**
-	 * Bean para encriptar contraseñas (BCrypt). OBLIGATORIO para RNF01.
-	 */
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    /**
+     * Bean para encriptar contraseñas (BCrypt). OBLIGATORIO para RNF01.
+     */
+
 }

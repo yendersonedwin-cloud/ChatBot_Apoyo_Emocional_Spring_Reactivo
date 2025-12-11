@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoMo - Tu amigo</title>
+    <link rel="stylesheet" href="chat.css">
+    <script defer src="app.js"></script>
+</head>
+<body>
+<div class="auth-modal" id="auth-modal">
+    <div class="auth-box">
+        <h2 id="auth-title">Iniciar Sesión</h2>
+        <form id="auth-form">
+            <input type="text" id="auth-name" placeholder="Nombre" style="display: none;">
+            <input type="email" id="auth-email" placeholder="Correo Electrónico" required>
+            <input type="password" id="auth-password" placeholder="Contraseña" required>
+            <button type="submit" id="auth-submit-btn">Entrar</button>
+            <p id="auth-error" class="error-message"></p>
+        </form>
+        <p class="switch-link">
+            ¿No tienes cuenta? <a href="#" id="switch-to-register">Regístrate</a>
+        </p>
+    </div>
+</div>
+<!-- Efecto de burbujas flotantes -->
+<div class="bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+</div>
+
+<div class="main-container">
+
+    <!-- Sidebar izquierdo con navegación -->
+    <aside class="sidebar-left">
+        <div class="momo-header">
+            <div class="momo-logo">
+                <img src="momo.png" alt="MoMo Icono" onerror="this.style.display='none'; this.parentElement.classList.add('no-image')">
+            </div>
+            <span>MoMo - Tu amigo</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" title="Inicio" data-page="chat">
+                <span class="icon">🏠</span>
+                <span class="tooltip">Inicio</span>
+            </a>
+            <a href="#" class="nav-item" title="Recursos" data-page="recursos">
+                <span class="icon">📚</span>
+                <span class="tooltip">Recursos</span>
+            </a>
+            <a href="#" class="nav-item" title="Diario" data-page="diario">
+                <span class="icon">✏️</span>
+                <span class="tooltip">Diario</span>
+            </a>
+            <a href="#" class="nav-item" title="Perfil" data-page="perfil">
+                <span class="icon">👤</span>
+                <span class="tooltip">Perfil</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Área principal del chat -->
+    <div class="chat-area">
+
+        <!-- Encabezado del chat con pestañas -->
+        <header class="chat-header">
+            <div class="header-left">
+                <div class="header-avatar-wrapper">
+                    <img src="momo.png" alt="MoMo" class="header-avatar" onerror="this.style.display='none'; this.parentElement.classList.add('no-image')">
+                    <div class="status-dot"></div>
+                </div>
+                <h2>MoMo - Tu amigo</h2>
+            </div>
+
+            <!-- Pestañas de opciones rápidas -->
+            <div class="quick-tabs">
+                <button class="tab-btn active" data-mood="calma">
+                    ❤️ Necesito Calma
+                </button>
+                <button class="tab-btn" data-mood="tema">
+                    ⭐ Cambiemos de Tema
+                </button>
+                <button class="tab-btn" data-mood="consejo">
+                    💡 Busco un Consejo
+                </button>
+                <button class="tab-btn" data-mood="mensaje">
+                    💌 Mensaje Tierno
+                </button>
+            </div>
+
+            <span class="menu-icon">☰</span>
+        </header>
+
+        <main class="content-wrapper">
+
+            <!-- Sección de mensajes del chat -->
+            <section class="chat-messages">
+                <h3 class="chat-title">Chat with MoMo 💡</h3>
+
+                <!-- Mensaje de bienvenida -->
+                <div class="message message-received">
+                    <img src="momo.png" alt="MoMo" class="avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23d4a574%22/%3E%3Ccircle cx=%2235%22 cy=%2245%22 r=%225%22 fill=%22%23333%22/%3E%3Ccircle cx=%2265%22 cy=%2245%22 r=%225%22 fill=%22%23333%22/%3E%3Cpath d=%22M 35 65 Q 50 75 65 65%22 stroke=%22%23333%22 stroke-width=%223%22 fill=%22none%22/%3E%3C/svg%3E'">
+                    <div class="message-content">
+                        <p>¡Hola! Soy MoMo 🐵✨ Estoy aquí para escucharte y ayudarte a sentirte mejor. ¿Cómo te sientes hoy?</p>
+                    </div>
+                </div>
+
+                <!-- Área de entrada de mensaje -->
+                <div class="input-area">
+                    <button class="mic-icon" title="Mensaje de voz">🎤</button>
+                    <input type="text" placeholder="Escribe tu mensaje...">
+                    <button class="heart-icon" title="Enviar mensaje">❤️</button>
+                </div>
+
+            </section>
+
+            <!-- Sidebar derecho con herramientas de calma -->
+            <aside class="sidebar-right">
+                <h3>Tu Espacio de Calma</h3>
+
+                <!-- Reproductor de audio mejorado -->
+                <div class="audio-player">
+                    <div class="audio-icon">🎵</div>
+                    <p>Sonidos de Naturaleza</p>
+                    <div class="audio-controls">
+                        <button class="audio-btn" title="Anterior">⏮</button>
+                        <button class="audio-btn play-btn" title="Reproducir">▶</button>
+                        <button class="audio-btn" title="Siguiente">⏭</button>
+                    </div>
+                    <div class="audio-waves">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+                <!-- Recordatorio con diseño mejorado -->
+                <div class="reminder">
+                    <h4>Recuerda:</h4>
+                    <p>Cada día es una oportunidad para encontrar paz.</p>
+                    <div class="heart-decoration">
+                        <span class="heart-pulse">💗</span>
+                    </div>
+                </div>
+
+                <!-- Contador de respiros -->
+                <div class="breathing-exercise">
+                    <h4>Ejercicio de Respiración</h4>
+                    <div class="breath-circle">
+                        <div class="breath-text">Inhala</div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+</div>
+</body>
+</html>
