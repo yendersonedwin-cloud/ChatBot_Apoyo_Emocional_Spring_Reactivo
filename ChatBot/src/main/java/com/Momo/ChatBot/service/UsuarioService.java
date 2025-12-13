@@ -10,40 +10,38 @@ import reactor.core.publisher.Mono;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder; // Inyectamos el componente de hasheo
 
-    // Constructor: Spring inyecta el Repositorio y el PasswordEncoder (BCrypt)
-    // Esto solo funciona si el @Bean de PasswordEncoder está en ChatBotApplication.java
+    // Inyección de dependencias por constructor
     public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     /**
-     * RF01: Registra un nuevo usuario, encriptando su contraseña.
-     * @param nombre Nombre del usuario.
-     * @param email Email (clave única).
-     * @param password Contraseña plana enviada por el cliente.
-     * @return Mono<Usuario> del usuario guardado de forma reactiva.
-     */
-    public Mono<Usuario> registrarUsuario(String nombre, String email, String password) {
-
-        // 1. Encriptar la contraseña (Hashing) - CUMPLIMIENTO RNF01
-        String passwordHash = passwordEncoder.encode(password);
-
-        // 2. Crear el objeto Usuario con el hash
-        Usuario nuevoUsuario=new Usuario(nombre,email,passwordHash);
-
-        // 3. Guardar en la base de datos R2DBC
-        return usuarioRepository.save(nuevoUsuario);
-    }
-
-    /**
-     * Busca un usuario por email de forma reactiva (necesario para login y verificación de registro).
-     * @param email Email a buscar.
-     * @return Mono<Usuario> si se encuentra.
+     * Busca un usuario por email. Utilizado principalmente por el AuthController (login y registro).
+     * @param email El correo electrónico del usuario.
+     * @return Mono<Usuario> que emite el usuario si existe, o un Mono vacío.
      */
     public Mono<Usuario> findByEmail(String email) {
         return usuarioRepository.findByEmail(email);
+    }
+
+    /**
+     * Registra un nuevo usuario en la base de datos, hasheando la contraseña.
+     * @param nombre Nombre del usuario.
+     * @param email Correo electrónico.
+     * @param password Contraseña en texto plano (se hashea internamente).
+     * @return Mono<Usuario> que emite el usuario recién creado.
+     */
+    public Mono<Usuario> registrarUsuario(String nombre, String email, String password) {
+        // 1. Hashear la contraseña antes de guardarla
+        String hashedPassword = passwordEncoder.encode(password);
+
+        // 2. Crear la nueva instancia de Usuario con la contraseña hasheada
+        Usuario nuevoUsuario = new Usuario(nombre, email, hashedPassword);
+
+        // 3. Guardar en la base de datos de forma reactiva
+        return usuarioRepository.save(nuevoUsuario);
     }
 }

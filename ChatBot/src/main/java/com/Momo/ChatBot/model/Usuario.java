@@ -5,26 +5,40 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.relational.core.mapping.Column; // Nueva importación
 
 import java.time.LocalDateTime;
 
-@Table("usuarios") // Define el nombre de la tabla
+// 1. CORRECCIÓN: Usar el nombre de la tabla de PostgreSQL: 'users'
+@Table("users")
+@Data // Incluye @Getter, @Setter, @ToString
 @NoArgsConstructor
-@Data
-@AllArgsConstructor // Este constructor es para Spring (incluye el ID)
+@AllArgsConstructor
 public class Usuario {
+
     @Id
-    private Long id; // Usar Long en vez de long
-    private String nombre;
+    private Long id;
+
+    // 2. CORRECCIÓN: Mapear al campo 'username' de la tabla 'users'
+    @Column("username") // Mapeo explícito
+    private String username;
+
     private String email;
-    private String passwordHash; // Almacena el hash de la contraseña, NUNCA el texto plano
+
+    // 3. CORRECCIÓN: Mapear al campo 'password_hash' de la tabla 'users'
+    @Column("password_hash") // Mapeo explícito
+    private String passwordHash;
+
+    // Spring Data R2DBC puede mapear 'fechaRegistro' a 'created_at' automáticamente
+    // si usas el @Column o si configuras un conversor, pero lo dejaremos simple:
+    @Column("created_at")
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
     /**
-     * Constructor para crear un nuevo usuario desde el servicio (sin ID ni fechaRegistro)
+     * Constructor para usar en el servicio (Registro)
      */
-    public Usuario(String nombre, String email, String passwordHash) {
-        this.nombre = nombre;
+    public Usuario(String username, String email, String passwordHash) {
+        this.username = username;
         this.email = email;
         this.passwordHash = passwordHash;
         this.fechaRegistro = LocalDateTime.now();
