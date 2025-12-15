@@ -5,24 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asistente Emocional Momo</title>
     <link rel="stylesheet" href="chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
 <div class="chat-container">
-    <div class="chat-header">Asistente Emocional Momo</div>
-    <div class="chat-messages">
-        <div class="message message-received" id="initial-message">
-            <p>Cargando...</p>
+
+    <div class="chat-header">
+        <div class="header-left">
+            <img src="momo.png" alt="Momo Avatar">
+            <span class="header-title">Capi</span>
+        </div>
+        <div class="header-right">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-cog"></i>
         </div>
     </div>
-    <div class="input-area">
+
+    <div class="chat-messages" id="chat-messages-container">
+        <div class="welcome-avatar" id="welcome-avatar">
+            <img src="momo.png" alt="Momo Grande">
+            <h2>Chat with MoMo!</h2>
+        </div>
+    </div>
+
+    <div class="resources-container hidden" id="resources-container">
+        <div class="resource-header">
+            <h2>Recursos de Bienestar 🧘‍♀️</h2>
+        </div>
+        <div class="resource-content">
+
+            <div class="mindfulness-card">
+                <h3>Respiración 4-7-8</h3>
+                <p>Una técnica sencilla para calmar el sistema nervioso en momentos de ansiedad.</p>
+                <ul>
+                    <li>Inhala contando hasta 4.</li>
+                    <li>Mantén el aire contando hasta 7.</li>
+                    <li>Exhala lentamente contando hasta 8.</li>
+                </ul>
+                <button class="resource-button" onclick="alert('Iniciando sesión de respiración...');">Iniciar guía</button>
+            </div>
+
+            <div class="mindfulness-card">
+                <h3>Escaneo Corporal</h3>
+                <p>Concéntrate en sentir cada parte de tu cuerpo, desde los pies hasta la cabeza, para anclarte al presente.</p>
+                <button class="resource-button" onclick="alert('Iniciando escaneo...');">Ver detalles</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="profile-container hidden" id="profile-container">
+        <div class="profile-info">
+            <i class="fas fa-user-circle profile-icon"></i>
+            <h2>Mi Perfil</h2>
+            <div class="detail-item">
+                <strong>Nombre:</strong> <span id="profile-name">Cargando...</span>
+            </div>
+            <div class="detail-item">
+                <strong>Correo:</strong> <span id="profile-email">Cargando...</span>
+            </div>
+            <p class="profile-tip">Tu información solo se usa para personalizar tu experiencia con Momo.</p>
+        </div>
+    </div>
+
+    <div class="input-area" id="input-area">
         <input type="text" id="message-input" placeholder="Escribe tu mensaje..." disabled>
-        <button id="send-button">➔</button>
+        <button id="send-button"><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <div class="bottom-nav" id="bottom-nav">
+        <div class="nav-item active" data-section="inicio">
+            <i class="fas fa-home icon"></i>
+            <span>Inicio</span>
+        </div>
+        <div class="nav-item" data-section="recursos">
+            <i class="fas fa-book icon"></i>
+            <span>Recursos</span>
+        </div>
+        <div class="nav-item" data-section="perfil">
+            <i class="fas fa-user-circle icon"></i>
+            <span>Perfil</span>
+        </div>
+        <div class="nav-item" id="logout-nav-item" data-section="cerrar">
+            <i class="fas fa-sign-out-alt icon"></i>
+            <span>Cerrar Sesión</span>
+        </div>
     </div>
 </div>
 
 <div class="auth-modal" id="auth-modal">
     <div class="auth-content">
+        <div class="auth-avatar">
+            <img src="momo.png" alt="Momo Capibara">
+        </div>
         <h2 id="auth-title">Iniciar sesión</h2>
         <form id="auth-form">
             <input type="text" id="auth-name" placeholder="Nombre" style="display: none;">
